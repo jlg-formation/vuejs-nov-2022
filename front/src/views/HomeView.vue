@@ -6,4 +6,8 @@
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+main {
+  flex: none;
+}
+</style>
