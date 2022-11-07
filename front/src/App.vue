@@ -5,9 +5,18 @@ import FooterLayout from "./components/layout/FooterLayout.vue";
 </script>
 
 <template>
-  <HeaderLayout></HeaderLayout>
-  <BodyLayout></BodyLayout>
-  <FooterLayout></FooterLayout>
+  <div>
+    <HeaderLayout></HeaderLayout>
+    <BodyLayout></BodyLayout>
+    <FooterLayout></FooterLayout>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+div {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+</style>
