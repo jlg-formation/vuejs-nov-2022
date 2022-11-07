@@ -2,6 +2,8 @@
   <main>
     <h1>Gérer efficacement votre stock !</h1>
     <button>Voir le stock</button>
+    <button class="primary">Voir le stock</button>
+    <button disabled>Voir le stock</button>
   </main>
 </template>
 
