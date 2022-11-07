@@ -1,9 +1,8 @@
-<script setup lang="ts">
-import TheWelcome from "../components/TheWelcome.vue";
-</script>
-
 <template>
   <main>
-    <TheWelcome />
+    <h1>Gérer efficacement votre stock !</h1>
+    <button>Voir le stock</button>
   </main>
 </template>
+
+<style scoped></style>
