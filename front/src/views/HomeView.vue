@@ -2,7 +2,7 @@
   <main>
     <h1>Gérer efficacement votre stock !</h1>
 
-    <button class="primary">Voir le stock</button>
+    <RouterLink to="/stock" class="primary button"> Voir le stock </RouterLink>
   </main>
 </template>
 

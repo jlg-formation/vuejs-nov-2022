@@ -10,10 +10,20 @@ const router = createRouter({
     },
     {
       path: "/legal",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import("../views/LegalView.vue"),
+    },
+    {
+      path: "/stock",
+      children: [
+        {
+          path: "",
+          component: () => import("../views/stock/ListView.vue"),
+        },
+        {
+          path: "add",
+          component: () => import("../views/stock/CreateView.vue"),
+        },
+      ],
     },
   ],
 });

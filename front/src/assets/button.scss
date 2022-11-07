@@ -1,4 +1,12 @@
+a.button,
 button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  text-decoration: inherit;
+  color: inherit;
   padding: 0.5em 1em;
 
   background-color: #eee;
