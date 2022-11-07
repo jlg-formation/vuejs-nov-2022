@@ -45,8 +45,41 @@
 </template>
 
 <style lang="scss" scoped>
+div.content {
+  display: flex;
+  flex-flow: column;
+  gap: 2em;
+}
 nav {
   display: flex;
   gap: 0.3em;
+}
+
+table {
+  border: 0.1em solid #bbb;
+
+  thead {
+    background-color: #bbb;
+  }
+
+  th,
+  td {
+    padding: 0.5em 1em;
+  }
+
+  tbody {
+    cursor: pointer;
+    tr:nth-child(even) {
+      background-color: #eee;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    tr.selected {
+      background-color: #ccc;
+    }
+  }
 }
 </style>
