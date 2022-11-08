@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-import { articles } from "@/stores/ArticleStore";
+import { useArticleStore } from "@/stores/ArticleStore";
+
+const articleStore = useArticleStore();
+const articles = articleStore.articles;
+
+// setTimeout(() => {
+//   console.log("timeout");
+//   articles.push({ id: "s2", name: "www", price: 1, qty: 1 });
+// }, 2000);
 </script>
 
 <template>

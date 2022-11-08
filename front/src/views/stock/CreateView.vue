@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { articleService } from "@/stores/ArticleStore";
+import { useArticleStore } from "@/stores/ArticleStore";
 import type { NewArticle } from "@gestionstock/common";
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -13,9 +13,11 @@ const newArticle: NewArticle = reactive({
   qty: 10,
 });
 
+const articleStore = useArticleStore();
+
 const submit = async (event: Event) => {
   console.log("event: ", event);
-  await articleService.add(newArticle);
+  await articleStore.add(newArticle);
   await router.push(route.matched[route.matched.length - 2].path);
 };
 </script>
