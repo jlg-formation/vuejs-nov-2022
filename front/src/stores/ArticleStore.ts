@@ -5,7 +5,7 @@ import {
   type NewArticle,
 } from "@gestionstock/common";
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const save = (articles: Article[]) => {
   localStorage.setItem("articles", JSON.stringify(articles));
@@ -27,11 +27,20 @@ const getArticles = () => {
 export const useArticleStore = defineStore("articles", () => {
   const articles = ref<Article[]>(getArticles());
 
+  console.log("defining store");
+
+  watch(
+    articles,
+    (newValue) => {
+      save(newValue);
+    },
+    { deep: true }
+  );
+
   const add = async (newArticle: NewArticle): Promise<void> => {
     await sleep(300);
     const article: Article = { ...newArticle, id: generateId() };
     articles.value.push(article);
-    save(articles.value);
   };
 
   const refresh = async () => {
@@ -39,9 +48,15 @@ export const useArticleStore = defineStore("articles", () => {
     articles.value = getArticles();
   };
 
+  const remove = async (selectedArticles: Set<Article>) => {
+    await sleep(300);
+    articles.value = articles.value.filter((a) => !selectedArticles.has(a));
+  };
+
   return {
     articles,
     add,
     refresh,
+    remove,
   };
 });

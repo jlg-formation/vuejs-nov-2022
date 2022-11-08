@@ -1,12 +1,16 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
+import type { Article } from "@gestionstock/common";
 import { computed, ref } from "vue";
 
 const isRefreshing = ref(false);
+const isRemoving = ref(false);
 
 const articleStore = useArticleStore();
 // const articles = toRef(articleStore, "articles");
 const articles = computed(() => articleStore.articles);
+
+const selectedArticles = ref(new Set<Article>());
 
 // setTimeout(() => {
 //   console.log("timeout");
@@ -18,10 +22,33 @@ const refresh = async () => {
     isRefreshing.value = true;
     console.log("refresh");
     await articleStore.refresh();
+    selectedArticles.value.clear();
   } catch (err) {
     console.log("err: ", err);
   } finally {
     isRefreshing.value = false;
+  }
+};
+
+const toggle = (a: Article) => {
+  if (selectedArticles.value.has(a)) {
+    selectedArticles.value.delete(a);
+    return;
+  }
+
+  selectedArticles.value.add(a);
+};
+
+const remove = async () => {
+  try {
+    isRemoving.value = true;
+    console.log("remove");
+    await articleStore.remove(selectedArticles.value);
+    selectedArticles.value.clear();
+  } catch (err) {
+    console.log("err: ", err);
+  } finally {
+    isRemoving.value = false;
   }
 };
 </script>
@@ -37,7 +64,11 @@ const refresh = async () => {
         <RouterLink :to="$route.path + '/add'" class="button" title="Ajouter">
           <FaIcon icon="fa-solid fa-plus" />
         </RouterLink>
-        <button title="Supprimer">
+        <button
+          title="Supprimer"
+          v-if="selectedArticles.size > 0"
+          @click="remove"
+        >
           <FaIcon icon="fa-solid fa-trash-can" />
         </button>
       </nav>
@@ -50,7 +81,12 @@ const refresh = async () => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="a in articles" :key="a.id">
+          <tr
+            v-for="a in articles"
+            :key="a.id"
+            :class="{ selected: selectedArticles.has(a) }"
+            @click="toggle(a)"
+          >
             <td class="name">{{ a.name }}</td>
             <td class="price">{{ a.price }} €</td>
             <td class="qty">{{ a.qty }}</td>
