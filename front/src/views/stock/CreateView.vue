@@ -1,18 +1,29 @@
+<script lang="ts" setup>
+import type { NewArticle } from "@gestionstock/common";
+import { reactive } from "vue";
+
+const newArticle: NewArticle = reactive({
+  name: "Truc",
+  price: 1,
+  qty: 10,
+});
+</script>
+
 <template>
   <main>
     <h1>Ajout d'un article</h1>
     <form>
       <label>
         <span>Nom</span>
-        <input type="text" />
+        <input type="text" v-model="newArticle.name" />
       </label>
       <label>
         <span>Prix</span>
-        <input type="text" />
+        <input type="number" v-model="newArticle.price" />
       </label>
       <label>
         <span>Quantité</span>
-        <input type="text" />
+        <input type="number" v-model="newArticle.qty" />
       </label>
       <button class="primary">Ajouter</button>
     </form>

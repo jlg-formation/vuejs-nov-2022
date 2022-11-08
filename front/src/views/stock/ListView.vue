@@ -1,11 +1,5 @@
 <script lang="ts" setup>
 import { articles } from "@/stores/ArticleStore";
-
-setTimeout(() => {
-  console.log("coucou");
-  articles.value.push({ id: "a5", name: "Truc", price: 2, qty: 5 });
-  console.log("articles: ", articles);
-}, 2000);
 </script>
 
 <template>
