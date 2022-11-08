@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
-import type { NewArticle } from "@gestionstock/common";
+import { temporize, type NewArticle } from "@gestionstock/common";
 import { reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
@@ -21,7 +21,7 @@ const submit = async (event: Event) => {
   try {
     isAdding.value = true;
     console.log("event: ", event);
-    await articleStore.add(newArticle);
+    await temporize(300, articleStore.add(newArticle));
     await router.push(route.matched[route.matched.length - 2].path);
   } catch (err) {
     console.log("err: ", err);

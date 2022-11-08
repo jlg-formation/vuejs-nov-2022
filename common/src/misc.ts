@@ -1,10 +1,5 @@
 export const sleep = (delay: number): Promise<void> =>
-  new Promise((resolve) =>
-    setTimeout(() => {
-      console.log("wake up");
-      resolve();
-    }, delay)
-  );
+  new Promise((resolve) => setTimeout(resolve, delay));
 
 export const temporize = async <T>(
   delay: number,

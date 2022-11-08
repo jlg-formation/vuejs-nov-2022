@@ -43,7 +43,7 @@ const remove = async () => {
   try {
     isRemoving.value = true;
     console.log("remove");
-    await articleStore.remove(selectedArticles.value);
+    await temporize(300, articleStore.remove(selectedArticles.value));
     selectedArticles.value.clear();
   } catch (err) {
     console.log("err: ", err);

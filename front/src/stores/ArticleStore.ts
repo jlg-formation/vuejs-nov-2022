@@ -27,8 +27,6 @@ const getArticles = () => {
 export const useArticleStore = defineStore("articles", () => {
   const articles = ref<Article[]>(getArticles());
 
-  console.log("defining store");
-
   watch(
     articles,
     (newValue) => {
