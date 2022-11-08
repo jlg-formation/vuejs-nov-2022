@@ -23,7 +23,11 @@ const submit = async (event: Event) => {
   try {
     isAdding.value = true;
     console.log("event: ", event);
-    await temporize(300, articleStore.add(newArticle));
+    await temporize(
+      300,
+      articleStore.add(newArticle).then(articleStore.refresh)
+    );
+
     await router.push(route.matched[route.matched.length - 2].path);
   } catch (err) {
     console.log("err: ", err);

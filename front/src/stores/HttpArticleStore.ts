@@ -1,5 +1,5 @@
 import { HTTP_ARTICLE_KEY } from "@/keys";
-import type { Article } from "@gestionstock/common";
+import type { Article, NewArticle } from "@gestionstock/common";
 import axios from "axios";
 import { defineStore } from "pinia";
 import { computed } from "vue";
@@ -19,9 +19,15 @@ export const useHttpArticleStore = defineStore(HTTP_ARTICLE_KEY, () => {
     console.log("articles: ", articles);
     articleStore.articles = articles;
   };
+
+  const add = async (a: NewArticle) => {
+    await articleStore.add(a);
+    await axios.post(url, a);
+  };
   return {
     ...articleStore,
     articles: computed(() => articleStore.articles),
     refresh,
+    add,
   };
 });

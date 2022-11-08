@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
-import { Article } from "@gestionstock/common";
+import {
+  type Article,
+  generateId,
+  type NewArticle,
+} from "@gestionstock/common";
 
 const articles: Article[] = [
   { id: "a1", name: "Tournevis", price: 2.99, qty: 120 },
@@ -23,6 +27,15 @@ app.get("/date", (req, res) => {
 
 app.get("/articles", (req, res) => {
   res.json(articles);
+});
+
+app.use(express.json());
+
+app.post("/articles", (req, res) => {
+  const newArticle: NewArticle = req.body;
+  const article = { ...newArticle, id: generateId() };
+  articles.push(article);
+  res.status(201).json({ id: article.id });
 });
 
 export const api = app;
