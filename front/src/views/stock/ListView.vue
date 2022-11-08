@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { Article } from "@gestionstock/common";
-const articles: Article[] = [
-  { id: "a1", name: "Tournevis", price: 2.99, qty: 120 },
-  { id: "a2", name: "Pelle", price: 8.1, qty: 30 },
-  { id: "a3", name: "Marteau", price: 5, qty: 200 },
-  { id: "a4", name: "Défonceuse", price: 120, qty: 32 },
-];
+import { articles } from "@/stores/ArticleStore";
+
+setTimeout(() => {
+  console.log("coucou");
+  articles.value.push({ id: "a5", name: "Truc", price: 2, qty: 5 });
+  console.log("articles: ", articles);
+}, 2000);
 </script>
 
 <template>
