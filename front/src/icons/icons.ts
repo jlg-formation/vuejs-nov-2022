@@ -6,6 +6,7 @@ import {
   faRotateRight,
   faPlus,
   faTrashCan,
+  faCircleNotch,
 } from "@fortawesome/free-solid-svg-icons";
 
 export { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -14,3 +15,4 @@ export { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(faRotateRight);
 library.add(faPlus);
 library.add(faTrashCan);
+library.add(faCircleNotch);

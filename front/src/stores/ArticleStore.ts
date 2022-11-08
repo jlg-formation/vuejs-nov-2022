@@ -1,5 +1,6 @@
 import {
   generateId,
+  sleep,
   type Article,
   type NewArticle,
 } from "@gestionstock/common";
@@ -15,6 +16,7 @@ export const useArticleStore = defineStore("articles", () => {
   ]);
 
   const add = async (newArticle: NewArticle): Promise<void> => {
+    await sleep(300);
     const article: Article = { ...newArticle, id: generateId() };
     articles.value.push(article);
   };

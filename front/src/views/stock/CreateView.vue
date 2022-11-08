@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
 import type { NewArticle } from "@gestionstock/common";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
+const isAdding = ref(false);
 
 const router = useRouter();
 const route = useRoute();
@@ -16,9 +18,16 @@ const newArticle: NewArticle = reactive({
 const articleStore = useArticleStore();
 
 const submit = async (event: Event) => {
-  console.log("event: ", event);
-  await articleStore.add(newArticle);
-  await router.push(route.matched[route.matched.length - 2].path);
+  try {
+    isAdding.value = true;
+    console.log("event: ", event);
+    await articleStore.add(newArticle);
+    await router.push(route.matched[route.matched.length - 2].path);
+  } catch (err) {
+    console.log("err: ", err);
+  } finally {
+    isAdding.value = false;
+  }
 };
 </script>
 
@@ -38,8 +47,11 @@ const submit = async (event: Event) => {
         <span>Quantité</span>
         <input type="number" v-model="newArticle.qty" />
       </label>
-      <button class="primary">
-        <FaIcon icon="fa-solid fa-plus" />
+      <button class="primary" :disabled="isAdding">
+        <FaIcon
+          :icon="'fa-solid ' + (isAdding ? 'fa-circle-notch' : 'fa-plus')"
+          :spin="isAdding"
+        />
         <span>Ajouter</span>
       </button>
     </form>
