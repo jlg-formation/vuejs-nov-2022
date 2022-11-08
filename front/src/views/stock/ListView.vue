@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
-import type { Article } from "@gestionstock/common";
+import { temporize, type Article } from "@gestionstock/common";
 import { computed, ref } from "vue";
 
 const isRefreshing = ref(false);
@@ -21,7 +21,7 @@ const refresh = async () => {
   try {
     isRefreshing.value = true;
     console.log("refresh");
-    await articleStore.refresh();
+    await temporize(300, articleStore.refresh());
     selectedArticles.value.clear();
   } catch (err) {
     console.log("err: ", err);

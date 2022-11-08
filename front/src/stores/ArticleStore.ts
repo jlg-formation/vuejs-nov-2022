@@ -38,18 +38,15 @@ export const useArticleStore = defineStore("articles", () => {
   );
 
   const add = async (newArticle: NewArticle): Promise<void> => {
-    await sleep(300);
     const article: Article = { ...newArticle, id: generateId() };
     articles.value.push(article);
   };
 
   const refresh = async () => {
-    await sleep(300);
     articles.value = getArticles();
   };
 
   const remove = async (selectedArticles: Set<Article>) => {
-    await sleep(300);
     articles.value = articles.value.filter((a) => !selectedArticles.has(a));
   };
 
