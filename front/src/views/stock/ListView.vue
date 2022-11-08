@@ -1,3 +1,13 @@
+<script lang="ts" setup>
+import type { Article } from "@gestionstock/common";
+const articles: Article[] = [
+  { id: "a1", name: "Tournevis", price: 2.99, qty: 120 },
+  { id: "a2", name: "Pelle", price: 8.1, qty: 30 },
+  { id: "a3", name: "Marteau", price: 5, qty: 200 },
+  { id: "a4", name: "Défonceuse", price: 120, qty: 32 },
+];
+</script>
+
 <template>
   <main>
     <h1>Liste des articles</h1>
@@ -18,25 +28,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="name">Tournevis</td>
-            <td class="price">2.99 €</td>
-            <td class="qty">120</td>
-          </tr>
-          <tr>
-            <td class="name">Pelle</td>
-            <td class="price">5.00 €</td>
-            <td class="qty">34</td>
-          </tr>
-          <tr>
-            <td class="name">Tondeuse à gazon</td>
-            <td class="price">230.00 €</td>
-            <td class="qty">11</td>
-          </tr>
-          <tr>
-            <td class="name">Défonceuse</td>
-            <td class="price">120.00 €</td>
-            <td class="qty">30</td>
+          <tr v-for="a in articles" :key="a.id">
+            <td class="name">{{ a.name }}</td>
+            <td class="price">{{ a.price }} €</td>
+            <td class="qty">{{ a.qty }}</td>
           </tr>
         </tbody>
       </table>

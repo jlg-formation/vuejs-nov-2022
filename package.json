@@ -15,5 +15,8 @@
     "common-front",
     "back",
     "front"
-  ]
+  ],
+  "devDependencies": {
+    "rimraf": "^3.0.2"
+  }
 }
