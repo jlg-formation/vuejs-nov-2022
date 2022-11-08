@@ -19,6 +19,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.2",
     "@gestionstock/common": "^1.0.0",
+    "axios": "^1.1.3",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.23",
     "sanitize.css": "^13.0.0",
