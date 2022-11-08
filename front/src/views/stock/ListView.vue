@@ -15,11 +15,15 @@ const articles = articleStore.articles;
     <h1>Liste des articles</h1>
     <div class="content">
       <nav>
-        <button>Rafraîchir</button>
-        <RouterLink :to="$route.path + '/add'" class="button">
-          Ajouter
+        <button title="Rafraîchir">
+          <FaIcon icon="fa-solid fa-rotate-right" />
+        </button>
+        <RouterLink :to="$route.path + '/add'" class="button" title="Ajouter">
+          <FaIcon icon="fa-solid fa-plus" />
         </RouterLink>
-        <button>Supprimer</button>
+        <button title="Supprimer">
+          <FaIcon icon="fa-solid fa-trash-can" />
+        </button>
       </nav>
       <table>
         <thead>
