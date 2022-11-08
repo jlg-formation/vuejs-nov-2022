@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import HeaderLayout from "./components/layout/HeaderLayout.vue";
+import { provide } from "vue";
 import BodyLayout from "./components/layout/BodyLayout.vue";
 import FooterLayout from "./components/layout/FooterLayout.vue";
-import { provide } from "vue";
-import { useArticleStore } from "./stores/ArticleStore";
+import HeaderLayout from "./components/layout/HeaderLayout.vue";
 import { ARTICLE_STORE_KEY } from "./keys";
+import { useHttpArticleStore } from "./stores/HttpArticleStore";
 
-provide(ARTICLE_STORE_KEY, useArticleStore());
+provide(ARTICLE_STORE_KEY, useHttpArticleStore());
 </script>
 
 <template>

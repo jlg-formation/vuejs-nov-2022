@@ -7,3 +7,10 @@ export const injectSafe = <T>(key: string): T => {
   }
   return result;
 };
+
+export const getErrorMessage = (err: unknown) => {
+  if (err instanceof Error) {
+    return err.message;
+  }
+  return "Oups. Erreur technique.";
+};

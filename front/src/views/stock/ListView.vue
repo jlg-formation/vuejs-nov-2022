@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import { ARTICLE_STORE_KEY } from "@/keys";
-import { injectSafe } from "@/misc";
+import { getErrorMessage, injectSafe } from "@/misc";
 import type { ArticleStore } from "@/stores/ArticleStore";
 import { temporize, type Article } from "@gestionstock/common";
-import { computed, inject, ref } from "vue";
+import { computed, ref } from "vue";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 
 const isRefreshing = ref(false);
 const isRemoving = ref(false);
+const errorMsg = ref("");
 
 const articleStore = injectSafe<ArticleStore>(ARTICLE_STORE_KEY);
 
@@ -22,12 +24,14 @@ const selectedArticles = ref(new Set<Article>());
 
 const refresh = async () => {
   try {
+    errorMsg.value = "";
     isRefreshing.value = true;
     console.log("refresh");
     await temporize(300, articleStore.refresh());
     selectedArticles.value.clear();
   } catch (err) {
     console.log("err: ", err);
+    errorMsg.value = getErrorMessage(err);
   } finally {
     isRefreshing.value = false;
   }
@@ -44,12 +48,14 @@ const toggle = (a: Article) => {
 
 const remove = async () => {
   try {
+    errorMsg.value = "";
     isRemoving.value = true;
     console.log("remove");
     await temporize(300, articleStore.remove(selectedArticles.value));
     selectedArticles.value.clear();
   } catch (err) {
     console.log("err: ", err);
+    errorMsg.value = getErrorMessage(err);
   } finally {
     isRemoving.value = false;
   }
@@ -81,6 +87,7 @@ const remove = async () => {
           />
         </button>
       </nav>
+      <ErrorMessage :msg="errorMsg" />
       <table>
         <thead>
           <tr>
@@ -110,7 +117,6 @@ const remove = async () => {
 div.content {
   display: flex;
   flex-flow: column;
-  gap: 2em;
 }
 nav {
   display: flex;
