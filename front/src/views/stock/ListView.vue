@@ -68,8 +68,14 @@ const remove = async () => {
           title="Supprimer"
           v-if="selectedArticles.size > 0"
           @click="remove"
+          :disabled="isRemoving"
         >
-          <FaIcon icon="fa-solid fa-trash-can" />
+          <FaIcon
+            :icon="
+              'fa-solid ' + (isRemoving ? 'fa-circle-notch' : 'fa-trash-can')
+            "
+            :spin="isRemoving"
+          />
         </button>
       </nav>
       <table>
