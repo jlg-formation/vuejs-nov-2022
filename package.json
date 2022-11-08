@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules"
+    "clean": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules",
+    "build": "npm run build -ws"
   },
   "keywords": [],
   "author": "",
