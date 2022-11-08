@@ -1,13 +1,20 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
+import { computed } from "vue";
 
 const articleStore = useArticleStore();
-const articles = articleStore.articles;
+// const articles = toRef(articleStore, "articles");
+const articles = computed(() => articleStore.articles);
 
 // setTimeout(() => {
 //   console.log("timeout");
 //   articles.push({ id: "s2", name: "www", price: 1, qty: 1 });
 // }, 2000);
+
+const refresh = async () => {
+  console.log("refresh");
+  await articleStore.refresh();
+};
 </script>
 
 <template>
@@ -15,7 +22,7 @@ const articles = articleStore.articles;
     <h1>Liste des articles</h1>
     <div class="content">
       <nav>
-        <button title="Rafraîchir">
+        <button title="Rafraîchir" @click="refresh">
           <FaIcon icon="fa-solid fa-rotate-right" />
         </button>
         <RouterLink :to="$route.path + '/add'" class="button" title="Ajouter">
