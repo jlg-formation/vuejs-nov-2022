@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-import { useArticleStore } from "@/stores/ArticleStore";
+import { ARTICLE_STORE_KEY } from "@/keys";
+import { injectSafe } from "@/misc";
+import type { ArticleStore } from "@/stores/ArticleStore";
 import { temporize, type Article } from "@gestionstock/common";
-import { computed, ref } from "vue";
+import { computed, inject, ref } from "vue";
 
 const isRefreshing = ref(false);
 const isRemoving = ref(false);
 
-const articleStore = useArticleStore();
+const articleStore = injectSafe<ArticleStore>(ARTICLE_STORE_KEY);
+
 // const articles = toRef(articleStore, "articles");
 const articles = computed(() => articleStore.articles);
 

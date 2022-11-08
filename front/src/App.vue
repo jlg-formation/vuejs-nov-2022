@@ -2,6 +2,11 @@
 import HeaderLayout from "./components/layout/HeaderLayout.vue";
 import BodyLayout from "./components/layout/BodyLayout.vue";
 import FooterLayout from "./components/layout/FooterLayout.vue";
+import { provide } from "vue";
+import { useArticleStore } from "./stores/ArticleStore";
+import { ARTICLE_STORE_KEY } from "./keys";
+
+provide(ARTICLE_STORE_KEY, useArticleStore());
 </script>
 
 <template>

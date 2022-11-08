@@ -1,6 +1,6 @@
+import { ARTICLE_KEY } from "@/keys";
 import {
   generateId,
-  sleep,
   type Article,
   type NewArticle,
 } from "@gestionstock/common";
@@ -8,11 +8,11 @@ import { defineStore } from "pinia";
 import { ref, watch } from "vue";
 
 const save = (articles: Article[]) => {
-  localStorage.setItem("articles", JSON.stringify(articles));
+  localStorage.setItem(ARTICLE_KEY, JSON.stringify(articles));
 };
 
 const getArticles = () => {
-  const str = localStorage.getItem("articles");
+  const str = localStorage.getItem(ARTICLE_KEY);
   if (str === null) {
     return [
       { id: "a1", name: "Tournevis", price: 2.99, qty: 120 },
@@ -24,7 +24,7 @@ const getArticles = () => {
   return JSON.parse(str) as Article[];
 };
 
-export const useArticleStore = defineStore("articles", () => {
+export const useArticleStore = defineStore(ARTICLE_KEY, () => {
   const articles = ref<Article[]>(getArticles());
 
   watch(
@@ -55,3 +55,5 @@ export const useArticleStore = defineStore("articles", () => {
     remove,
   };
 });
+
+export type ArticleStore = ReturnType<typeof useArticleStore>;

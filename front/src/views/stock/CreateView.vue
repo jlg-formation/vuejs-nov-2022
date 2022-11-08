@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { useArticleStore } from "@/stores/ArticleStore";
+import { ARTICLE_STORE_KEY } from "@/keys";
+import { injectSafe } from "@/misc";
+import type { ArticleStore } from "@/stores/ArticleStore";
 import { temporize, type NewArticle } from "@gestionstock/common";
 import { reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -15,7 +17,7 @@ const newArticle: NewArticle = reactive({
   qty: 10,
 });
 
-const articleStore = useArticleStore();
+const articleStore = injectSafe<ArticleStore>(ARTICLE_STORE_KEY);
 
 const submit = async (event: Event) => {
   try {
