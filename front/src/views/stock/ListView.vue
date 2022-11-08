@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
-import { computed } from "vue";
+import { computed, ref } from "vue";
+
+const isRefreshing = ref(false);
 
 const articleStore = useArticleStore();
 // const articles = toRef(articleStore, "articles");
@@ -12,8 +14,15 @@ const articles = computed(() => articleStore.articles);
 // }, 2000);
 
 const refresh = async () => {
-  console.log("refresh");
-  await articleStore.refresh();
+  try {
+    isRefreshing.value = true;
+    console.log("refresh");
+    await articleStore.refresh();
+  } catch (err) {
+    console.log("err: ", err);
+  } finally {
+    isRefreshing.value = false;
+  }
 };
 </script>
 
@@ -22,8 +31,8 @@ const refresh = async () => {
     <h1>Liste des articles</h1>
     <div class="content">
       <nav>
-        <button title="Rafraîchir" @click="refresh">
-          <FaIcon icon="fa-solid fa-rotate-right" />
+        <button title="Rafraîchir" @click="refresh" :disabled="isRefreshing">
+          <FaIcon icon="fa-solid fa-rotate-right" :spin="isRefreshing" />
         </button>
         <RouterLink :to="$route.path + '/add'" class="button" title="Ajouter">
           <FaIcon icon="fa-solid fa-plus" />
