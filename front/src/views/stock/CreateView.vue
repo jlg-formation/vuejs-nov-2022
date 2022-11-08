@@ -1,18 +1,29 @@
 <script lang="ts" setup>
+import { articleService } from "@/stores/ArticleStore";
 import type { NewArticle } from "@gestionstock/common";
 import { reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
 
 const newArticle: NewArticle = reactive({
   name: "Truc",
   price: 1,
   qty: 10,
 });
+
+const submit = async (event: Event) => {
+  console.log("event: ", event);
+  await articleService.add(newArticle);
+  await router.push(route.matched[route.matched.length - 2].path);
+};
 </script>
 
 <template>
   <main>
     <h1>Ajout d'un article</h1>
-    <form>
+    <form @submit.prevent="submit">
       <label>
         <span>Nom</span>
         <input type="text" v-model="newArticle.name" />
