@@ -1,8 +1,12 @@
+<script lang="ts" setup>
+import { version } from "../../package.json";
+</script>
+
 <template>
   <main>
     <DynamicTitle title="Mentions Légales" />
     <h1>Mentions Légales</h1>
-    <TheVersion />
+    <TheVersion :frontVersion="version" />
     <p>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui excepturi
       veniam sunt corporis. Aliquam iure sunt atque sit eius accusantium.
