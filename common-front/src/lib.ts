@@ -1,3 +1,1 @@
-export const trac = () => {
-  console.log("hello");
-};
+export * from "./plugins/misc";

@@ -1,13 +1,13 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import { trac } from "@gestionstock/common-front";
+import { misc } from "@gestionstock/common-front";
 
 import App from "./App.vue";
 import router from "./router";
 
 import "./assets/main.scss";
+import "@gestionstock/common-front/dist/style.css";
 import { FontAwesomeIcon } from "./icons/icons";
-import { misc } from "./misc/misc";
 
 const app = createApp(App);
 
@@ -15,9 +15,7 @@ app.use(createPinia());
 app.use(router);
 app.component("FaIcon", FontAwesomeIcon);
 app.use(misc, {
-  appName: "Gestion Stockxxx",
+  appName: "Gestion Stock",
 });
 
 app.mount("#app");
-
-trac();

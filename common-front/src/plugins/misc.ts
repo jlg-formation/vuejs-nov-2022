@@ -1,7 +1,7 @@
 import type { Plugin } from "vue";
 
-import DynamicTitle from "@/components/DynamicTitle.vue";
-import ErrorMessage from "@/components/ErrorMessage.vue";
+import DynamicTitle from "../components/DynamicTitle.vue";
+import ErrorMessage from "../components/ErrorMessage.vue";
 
 export const misc: Plugin = (
   app,
@@ -15,7 +15,7 @@ export const misc: Plugin = (
     options?.appName ?? "Replace me by a appName";
 };
 
-declare module "vue" {
+declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     gs$appName: string;
   }
