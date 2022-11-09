@@ -13,6 +13,7 @@ export default defineConfig({
     dts({
       compilerOptions: {
         jsx: ts.JsxEmit.Preserve,
+        resolveJsonModule: true,
       },
     }),
     vue(),
