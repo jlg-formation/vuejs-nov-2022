@@ -3,7 +3,7 @@ import { ARTICLE_STORE_KEY } from "@/keys";
 import { injectSafe } from "@/misc";
 import type { ArticleStore } from "@/stores/ArticleStore";
 import { temporize, type NewArticle } from "@gestionstock/common";
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const isAdding = ref(false);
@@ -15,6 +15,18 @@ const newArticle: NewArticle = reactive({
   name: "Truc",
   price: 1,
   qty: 10,
+});
+
+const isNameValid = computed(() => {
+  console.log("checking name");
+  return newArticle.name !== "";
+});
+const isPriceValid = computed(() => {
+  return newArticle.price > 0;
+});
+
+const isFormValid = computed(() => {
+  return isNameValid.value && isPriceValid.value;
 });
 
 const articleStore = injectSafe<ArticleStore>(ARTICLE_STORE_KEY);
@@ -54,7 +66,7 @@ const submit = async (event: Event) => {
         <span>Quantité</span>
         <input type="number" v-model="newArticle.qty" />
       </label>
-      <button class="primary" :disabled="isAdding">
+      <button class="primary" :disabled="isAdding || !isFormValid">
         <FaIcon
           :icon="'fa-solid ' + (isAdding ? 'fa-circle-notch' : 'fa-plus')"
           :spin="isAdding"
