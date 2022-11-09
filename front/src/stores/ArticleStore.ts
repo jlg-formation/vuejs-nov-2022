@@ -22,6 +22,7 @@ const getArticles = () => {
 export const useArticleStore = defineStore(ARTICLE_KEY, () => {
   const articles = ref<Article[]>(getArticles());
   const isLoading = ref(false);
+  const loadingErrorMsg = ref("");
 
   watch(
     articles,
@@ -50,6 +51,7 @@ export const useArticleStore = defineStore(ARTICLE_KEY, () => {
     refresh,
     remove,
     isLoading,
+    loadingErrorMsg,
   };
 });
 

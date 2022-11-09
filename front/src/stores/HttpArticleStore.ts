@@ -13,19 +13,22 @@ export const useHttpArticleStore = defineStore(HTTP_ARTICLE_KEY, () => {
 
   const refresh = async () => {
     // await articleStore.refresh();
-
-    const response = await axios.get<Article[]>(url);
-    const articles = response.data;
-    console.log("articles: ", articles);
-    articleStore.articles = articles;
+    articleStore.loadingErrorMsg = "";
+    try {
+      const response = await axios.get<Article[]>(url);
+      const articles = response.data;
+      console.log("articles: ", articles);
+      articleStore.articles = articles;
+    } catch (err) {
+      console.log("err: ", err);
+      articleStore.loadingErrorMsg = "Erreur de chargement.";
+    }
   };
 
   const init = async () => {
     try {
       articleStore.isLoading = true;
       await refresh();
-    } catch (err) {
-      console.log("err: ", err);
     } finally {
       articleStore.isLoading = false;
     }
@@ -34,11 +37,13 @@ export const useHttpArticleStore = defineStore(HTTP_ARTICLE_KEY, () => {
   init();
 
   const add = async (a: NewArticle) => {
+    articleStore.loadingErrorMsg = "";
     await articleStore.add(a);
     await axios.post(url, a);
   };
 
   const remove = async (selectedArticles: Set<Article>) => {
+    articleStore.loadingErrorMsg = "";
     const ids = [...selectedArticles].map((a) => a.id);
     await axios.delete(url, {
       data: ids,
@@ -49,6 +54,7 @@ export const useHttpArticleStore = defineStore(HTTP_ARTICLE_KEY, () => {
     ...articleStore,
     articles: computed(() => articleStore.articles),
     isLoading: computed(() => articleStore.isLoading),
+    loadingErrorMsg: computed(() => articleStore.loadingErrorMsg),
     refresh,
     add,
     remove,

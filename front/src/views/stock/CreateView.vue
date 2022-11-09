@@ -39,6 +39,7 @@ const submit = async (event: Event) => {
 
 <template>
   <main>
+    <DynamicTitle title="Ajout d'un article" />
     <h1>Ajout d'un article</h1>
     <form @submit.prevent="submit">
       <label>

@@ -4,11 +4,14 @@ import { getErrorMessage, injectSafe } from "@/misc";
 import type { ArticleStore } from "@/stores/ArticleStore";
 import { temporize, type Article } from "@gestionstock/common";
 import { computed, ref } from "vue";
-import ErrorMessage from "@/components/ErrorMessage.vue";
 
 const isRefreshing = ref(false);
 const isRemoving = ref(false);
 const errorMsg = ref("");
+
+const getErrorMsg = computed(() => {
+  return errorMsg.value || articleStore.loadingErrorMsg;
+});
 
 const articleStore = injectSafe<ArticleStore>(ARTICLE_STORE_KEY);
 
@@ -67,6 +70,7 @@ const remove = async () => {
 
 <template>
   <main>
+    <DynamicTitle title="Liste des articles" />
     <h1>Liste des articles</h1>
     <div class="content">
       <nav>
@@ -90,7 +94,7 @@ const remove = async () => {
           />
         </button>
       </nav>
-      <ErrorMessage :msg="errorMsg" />
+      <ErrorMessage :msg="getErrorMsg" />
       <table>
         <thead>
           <tr>

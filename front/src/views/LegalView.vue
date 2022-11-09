@@ -1,5 +1,6 @@
 <template>
   <main>
+    <DynamicTitle title="Mentions Légales" />
     <h1>Mentions Légales</h1>
     <p>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui excepturi
