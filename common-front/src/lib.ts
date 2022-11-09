@@ -1,3 +1,3 @@
-export const truc = () => {
+export const trac = () => {
   console.log("hello");
 };

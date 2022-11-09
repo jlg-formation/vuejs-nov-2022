@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import { truc } from "@gestionstock/common-front";
+import { trac } from "@gestionstock/common-front";
 
 import App from "./App.vue";
 import router from "./router";
@@ -20,4 +20,4 @@ app.use(misc, {
 
 app.mount("#app");
 
-truc();
+trac();
