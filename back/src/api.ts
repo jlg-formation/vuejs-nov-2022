@@ -18,7 +18,7 @@ const app = express.Router();
 app.use(cors());
 
 app.use((req, res, next) => {
-  setTimeout(next, 2000);
+  setTimeout(next, 1000);
 });
 
 app.get("/date", (req, res) => {
