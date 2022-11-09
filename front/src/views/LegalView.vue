@@ -2,6 +2,7 @@
   <main>
     <DynamicTitle title="Mentions Légales" />
     <h1>Mentions Légales</h1>
+    <TheVersion />
     <p>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui excepturi
       veniam sunt corporis. Aliquam iure sunt atque sit eius accusantium.
