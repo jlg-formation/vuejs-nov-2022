@@ -6,15 +6,15 @@ import router from "./router";
 
 import "./assets/main.scss";
 import { FontAwesomeIcon } from "./icons/icons";
-import DynamicTitle from "./components/DynamicTitle.vue";
-import ErrorMessage from "./components/ErrorMessage.vue";
+import { misc } from "./misc/misc";
 
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
 app.component("FaIcon", FontAwesomeIcon);
-app.component("DynamicTitle", DynamicTitle);
-app.component("ErrorMessage", ErrorMessage);
+app.use(misc, {
+  appName: "Gestion Stockxxx",
+});
 
 app.mount("#app");

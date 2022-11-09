@@ -8,5 +8,5 @@ defineProps({
 </script>
 
 <template>
-  <Teleport to="head title"> Gestion Stock : {{ title }} </Teleport>
+  <Teleport to="head title"> {{ gs$appName }} : {{ title }} </Teleport>
 </template>
