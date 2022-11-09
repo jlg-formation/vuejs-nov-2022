@@ -100,7 +100,16 @@ const remove = async () => {
           </tr>
         </thead>
         <tbody>
+          <tr class="isLoading" v-if="articleStore.isLoading">
+            <td colspan="3">
+              <div>
+                <FaIcon icon="fa-solid fa-circle-notch" spin />
+                <span>En cours de chargement...</span>
+              </div>
+            </td>
+          </tr>
           <tr
+            :hidden="articleStore.isLoading"
             v-for="a in articles"
             :key="a.id"
             :class="{ selected: selectedArticles.has(a) }"
@@ -152,5 +161,12 @@ table {
       background-color: #ccc;
     }
   }
+}
+
+.isLoading td div {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  width: 100%;
 }
 </style>
