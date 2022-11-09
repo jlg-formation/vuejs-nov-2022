@@ -44,7 +44,7 @@ const submit = async (event: Event) => {
     <form @submit.prevent="submit">
       <label>
         <span>Nom</span>
-        <input type="text" v-model="newArticle.name" />
+        <input type="text" v-model="newArticle.name" v-focus />
       </label>
       <label>
         <span>Prix</span>
