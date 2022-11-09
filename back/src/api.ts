@@ -6,7 +6,7 @@ import {
   type NewArticle,
 } from "@gestionstock/common";
 
-const articles: Article[] = [
+let articles: Article[] = [
   { id: "a1", name: "Tournevis", price: 2.99, qty: 120 },
   { id: "a2", name: "Pelle", price: 8.1, qty: 30 },
   { id: "a3", name: "Marteau", price: 5, qty: 200 },
@@ -36,6 +36,12 @@ app.post("/articles", (req, res) => {
   const article = { ...newArticle, id: generateId() };
   articles.push(article);
   res.status(201).json({ id: article.id });
+});
+
+app.delete("/articles", (req, res) => {
+  const ids: string[] = req.body;
+  articles = articles.filter((a) => !ids.includes(a.id));
+  res.status(204).end();
 });
 
 export const api = app;
