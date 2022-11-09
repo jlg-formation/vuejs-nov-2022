@@ -20,14 +20,37 @@ export const useHttpArticleStore = defineStore(HTTP_ARTICLE_KEY, () => {
     articleStore.articles = articles;
   };
 
+  const init = async () => {
+    try {
+      articleStore.isLoading = true;
+      await refresh();
+    } catch (err) {
+      console.log("err: ", err);
+    } finally {
+      articleStore.isLoading = false;
+    }
+  };
+
+  init();
+
   const add = async (a: NewArticle) => {
     await articleStore.add(a);
     await axios.post(url, a);
   };
+
+  const remove = async (selectedArticles: Set<Article>) => {
+    const ids = [...selectedArticles].map((a) => a.id);
+    await axios.delete(url, {
+      data: ids,
+    });
+  };
+
   return {
     ...articleStore,
     articles: computed(() => articleStore.articles),
+    isLoading: computed(() => articleStore.isLoading),
     refresh,
     add,
+    remove,
   };
 });
